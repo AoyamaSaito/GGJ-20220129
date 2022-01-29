@@ -8,6 +8,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 {
     /// <summary>肉体ならfalse</summary>
     bool _isBodyOrAstral = false;
+    public bool IsBodyOrAstral { get { return _isBodyOrAstral; } }
     [Tooltip("幽体のゲームオブジェクト")]
     [SerializeField] GameObject _astralBody;
     /// <summary>幽体のインスタンス</summary>
@@ -103,8 +104,8 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 
     private void LateUpdate()
     {
-        if(_anim)
-        _anim.SetBool("_isBodyOrAstral", _isBodyOrAstral);
+        if (_anim)
+            _anim.SetBool("_isBodyOrAstral", _isBodyOrAstral);
     }
 
     /// <summary>肉体と幽体を切り替え </summary>
@@ -153,7 +154,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 
     IEnumerator Buck(float time, Vector2 astral, Vector2 body)
     {
-        var go =  Instantiate(_orb, _astralInstance.transform.position, Quaternion.identity);
+        var go = Instantiate(_orb, _astralInstance.transform.position, Quaternion.identity);
         for (float course = 0; course <= time; course += Time.deltaTime)
         {
             go.transform.position = Vector2.Lerp(astral, body, course / time);
