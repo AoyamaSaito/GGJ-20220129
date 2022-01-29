@@ -5,11 +5,11 @@ using UnityEngine;
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     public Transform SavePoint => _savePoint;
-    public int SavePointIndex => 
+    //public int SavePointIndex => 
     public float Timer => _timer;
 
     [SerializeField] private Transform _savePoint;
-    private int _saveP
+    //private int _saveP
     private float _timer;
 
 
