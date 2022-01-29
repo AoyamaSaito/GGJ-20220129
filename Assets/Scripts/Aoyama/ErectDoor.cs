@@ -7,19 +7,24 @@ using UnityEngine;
 public class ErectDoor : DoorBase
 {
     [SerializeField] Animation _electromagneticAnim;
-    [SerializeField] AudioSource _electromagneticAudio;
+    [SerializeField] float _openSoundDelay = 0.5f;
     [SerializeField] GameObject _electromagnetiObj;
     public override void Push()
     {
-        _electromagneticAudio.Play();
-        _electromagneticAnim.Play();
-        _electromagnetiObj.SetActive(false);
-        //è¡Ç¶ÇÈ
+        SoundManager.Instance.UseSound(SoundType.Button);
+        StartCoroutine(OpenSound());
     }
 
     void Start()
     {
-        _electromagneticAudio = GetComponent<AudioSource>();
         _electromagneticAnim = GetComponent<Animation>();
+    }
+
+    IEnumerator OpenSound()
+    {
+        yield return new WaitForSeconds(_openSoundDelay);
+        SoundManager.Instance.UseSound(SoundType.DoorOpen);
+        _electromagneticAnim.Play();
+        _electromagnetiObj.SetActive(false);
     }
 }
