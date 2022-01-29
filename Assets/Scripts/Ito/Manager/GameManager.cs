@@ -4,8 +4,28 @@ using UnityEngine;
 
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
-    public float Timer { get; private set; }
-    /// <summary>プレイヤーの残基</summary>
-    public int Residue { get; private set; }
-    
+    public Transform SavePoint => _savePoint;
+    public int SavePointIndex => 
+    public float Timer => _timer;
+
+    [SerializeField] private Transform _savePoint;
+    private int _saveP
+    private float _timer;
+
+
+    private void Update()
+    {
+        _timer -= Time.deltaTime;
+    }
+
+    public void TimeOver()
+    {
+
+    }
+
+    public void Respawn()
+    {
+
+    }
+
 }
