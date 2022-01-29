@@ -16,10 +16,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _bodySpeed;
     [Tooltip("幽体状態の移動速度")]
     [SerializeField] Vector2 _astralSpeed;
-    [Tooltip("肉体のカメラ")]
-    [SerializeField] CinemachineVirtualCameraBase _bodyVCam;
-    [Tooltip("幽体のカメラ")]
-    [SerializeField] CinemachineVirtualCameraBase _astralVCam;
+    [Tooltip("肉体のカメラ(右)")]
+    [SerializeField] CinemachineVirtualCamera _bodyVCamRight;
+    [Tooltip("肉体のカメラ(左)")]
+    [SerializeField] CinemachineVirtualCamera _bodyVCamLeft;
+    CinemachineVirtualCamera _bodyVCam;
+    [Tooltip("幽体のカメラ(右)")]
+    [SerializeField] CinemachineVirtualCamera _astralVCamRight;
+    [Tooltip("幽体のカメラ(左)")]
+    [SerializeField] CinemachineVirtualCamera _astralVCamLeft;
+    CinemachineVirtualCamera _astralVCam;
     /// <summary>移動入力値</summary>
     Vector2 _move;
 
@@ -29,13 +35,18 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D _rb;
     Rigidbody2D _astralRb;
 
+
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _bodySprite = GetComponent<SpriteRenderer>();
-        _bodyVCam.Priority = 10;
-        _astralVCam.Priority = 10;
+        _bodyVCam = _bodyVCamRight;
+        _astralVCam = _astralVCamRight;
+        _bodyVCamRight.Priority = 10;
+        _astralVCamLeft.Priority = 10;
+        _bodyVCamRight.Priority = 10;
+        _astralVCamLeft.Priority = 10;
         _bodyVCam.MoveToTopOfPrioritySubqueue();
     }
 
@@ -57,10 +68,14 @@ public class PlayerController : MonoBehaviour
             if (_move.x < 0)
             {
                 _astralSprite.flipX = true;
+                _astralVCam = _astralVCamLeft;
+                _astralVCam.MoveToTopOfPrioritySubqueue();
             }
             else if (_move.x > 0)
             {
                 _astralSprite.flipX = false;
+                _astralVCam = _astralVCamRight;
+                _astralVCam.MoveToTopOfPrioritySubqueue();
             }
         }
         else
@@ -69,10 +84,14 @@ public class PlayerController : MonoBehaviour
             if (_move.x < 0)
             {
                 _bodySprite.flipX = true;
+                _bodyVCam = _bodyVCamLeft;
+                _bodyVCam.MoveToTopOfPrioritySubqueue();
             }
             else if (_move.x > 0)
             {
                 _bodySprite.flipX = false;
+                _bodyVCam = _bodyVCamRight;
+                _bodyVCam.MoveToTopOfPrioritySubqueue();
             }
         }
     }
@@ -91,14 +110,21 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            _astralInstance = Instantiate(_astralBody, transform.position, transform.rotation);
+            _astralInstance = Instantiate(_astralBody, transform.position, Quaternion.identity);
             _astralRb = _astralInstance.GetComponent<Rigidbody2D>();
             _astralSprite = _astralInstance.GetComponent<SpriteRenderer>();
             _astralSprite.flipX = _bodySprite.flipX;
+            if (_bodySprite.flipX)
+            {
+                _astralVCam = _astralVCamLeft;
+            }
+            else
+            {
+                _astralVCam = _astralVCamRight;
+            }
             _isBodyOrAstral = true;
             _rb.velocity = Vector2.zero;
             _astralVCam.MoveToTopOfPrioritySubqueue();
-            _astralVCam.LookAt = _astralInstance.transform;
             _astralVCam.Follow = _astralInstance.transform;
         }
     }
