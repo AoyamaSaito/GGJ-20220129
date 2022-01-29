@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class Door1 : DoorBase
 {
-
+    //[SerializeField] Animation _doorAnim;
+    [SerializeField] Animator _doorAnim;
+    [SerializeField] float _openSoundDelay = 0.5f;
     public override void Push()
     {
-        //è„Ç…è„Ç™ÇÈ
+        SoundManager.Instance.UseSound(SoundType.Button);
+        StartCoroutine(OpenSound());
+        Debug.Log("Ç«Ç†");
     }
 
     void Start()
     {
-
+        _doorAnim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator OpenSound()
     {
-
+        yield return new WaitForSeconds(_openSoundDelay);
+        SoundManager.Instance.UseSound(SoundType.DoorOpen);
+        _doorAnim.Play("Door");
     }
 }
