@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _brendTime;
     [Tooltip("戻る奴")]
     [SerializeField] GameObject _orb;
+    [Tooltip("肉体のアニメーター")]
+    [SerializeField] Animator _anim;
 
 
     SpriteRenderer _bodySprite;
@@ -97,6 +99,12 @@ public class PlayerController : MonoBehaviour
                 _bodyVCam.MoveToTopOfPrioritySubqueue();
             }
         }
+    }
+
+    private void LateUpdate()
+    {
+        if(_anim)
+        _anim.SetBool("_isBodyOrAstral", _isBodyOrAstral);
     }
 
     /// <summary>肉体と幽体を切り替え </summary>
