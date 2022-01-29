@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent (typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
     /// <summary>“÷‘Ì‚È‚çfalse</summary>
@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
     /// <summary>ˆÚ“®“ü—Í’l</summary>
     Vector2 _move;
 
+    SpriteRenderer _bodySprite;
+    SpriteRenderer _astralSprite;
+
     Rigidbody2D _rb;
     Rigidbody2D _astralRb;
 
@@ -25,6 +28,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _bodySprite = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -42,10 +46,26 @@ public class PlayerController : MonoBehaviour
         if (_isBodyOrAstral)
         {
             _astralRb.velocity = _astralSpeed * _move;
+            if (_move.x < 0)
+            {
+                _astralSprite.flipX = true;
+            }
+            else if (_move.x > 0)
+            {
+                _astralSprite.flipX = false;
+            }
         }
         else
         {
             _rb.velocity = new Vector2(_bodySpeed * _move.x, 0);
+            if (_move.x < 0)
+            {
+                _bodySprite.flipX = true;
+            }
+            else if (_move.x > 0)
+            {
+                _bodySprite.flipX = false;
+            }
         }
     }
 
@@ -63,7 +83,9 @@ public class PlayerController : MonoBehaviour
         {
             _astralInstance = Instantiate(_astralBody, transform);
             _astralRb = _astralInstance.GetComponent<Rigidbody2D>();
+            _astralSprite = _astralInstance.GetComponent<SpriteRenderer>();
             _isBodyOrAstral = true;
+            _rb.velocity = Vector2.zero;
         }
     }
 }
