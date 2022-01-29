@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>“÷‘Ì‚Æ—H‘Ì‚ğØ‚è‘Ö‚¦ </summary>
     void SwitchBodyOrAstral()
     {
         if (_isBodyOrAstral)
