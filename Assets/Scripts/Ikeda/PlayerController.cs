@@ -4,7 +4,7 @@ using UnityEngine;
 using Cinemachine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : SingletonMonoBehaviour<PlayerController>
 {
     /// <summary>“÷‘Ì‚È‚çfalse</summary>
     bool _isBodyOrAstral = false;
