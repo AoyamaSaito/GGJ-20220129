@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera _astralVCamRight;
     [Tooltip("óHëÃÇÃÉJÉÅÉâ(ç∂)")]
     [SerializeField] CinemachineVirtualCamera _astralVCamLeft;
-    CinemachineVirtualCamera _astralVCam;
+    [SerializeField] ParticleSystem _callParticle;
     /// <summary>à⁄ìÆì¸óÕíl</summary>
     Vector2 _move;
 
@@ -42,7 +42,6 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _bodySprite = GetComponent<SpriteRenderer>();
         _bodyVCam = _bodyVCamRight;
-        _astralVCam = _astralVCamRight;
         _bodyVCamRight.Priority = 10;
         _astralVCamLeft.Priority = 10;
         _bodyVCamRight.Priority = 10;
@@ -68,14 +67,12 @@ public class PlayerController : MonoBehaviour
             if (_move.x < 0)
             {
                 _astralSprite.flipX = true;
-                _astralVCam = _astralVCamLeft;
-                _astralVCam.MoveToTopOfPrioritySubqueue();
+                _astralVCamLeft.MoveToTopOfPrioritySubqueue();
             }
             else if (_move.x > 0)
             {
                 _astralSprite.flipX = false;
-                _astralVCam = _astralVCamRight;
-                _astralVCam.MoveToTopOfPrioritySubqueue();
+                _astralVCamRight.MoveToTopOfPrioritySubqueue();
             }
         }
         else
@@ -116,16 +113,26 @@ public class PlayerController : MonoBehaviour
             _astralSprite.flipX = _bodySprite.flipX;
             if (_bodySprite.flipX)
             {
-                _astralVCam = _astralVCamLeft;
+                _astralVCamLeft.MoveToTopOfPrioritySubqueue();
+                _astralVCamLeft.Follow = _astralInstance.transform;
+                _astralVCamRight.Follow = _astralInstance.transform;
             }
             else
             {
-                _astralVCam = _astralVCamRight;
+                _astralVCamRight.MoveToTopOfPrioritySubqueue();
+                _astralVCamLeft.Follow = _astralInstance.transform;
+                _astralVCamRight.Follow = _astralInstance.transform;
             }
             _isBodyOrAstral = true;
             _rb.velocity = Vector2.zero;
-            _astralVCam.MoveToTopOfPrioritySubqueue();
-            _astralVCam.Follow = _astralInstance.transform;
+            var ps = Instantiate(_callParticle, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
+            StartCoroutine(Particle(ps));
         }
+    }
+
+    IEnumerator Particle(ParticleSystem ps)
+    {
+        yield return null;
+        ps.Play();
     }
 }
