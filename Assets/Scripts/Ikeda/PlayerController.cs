@@ -75,12 +75,12 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
             _astralRb.velocity = _astralSpeed * _move;
             if (_move.x < 0)
             {
-                _astralSprite.flipX = true;
+                _astralInstance.transform.eulerAngles = new Vector3(0, 180, 0);
                 _astralVCamLeft.MoveToTopOfPrioritySubqueue();
             }
             else if (_move.x > 0)
             {
-                _astralSprite.flipX = false;
+                _astralInstance.transform.eulerAngles = Vector3.zero;
                 _astralVCamRight.MoveToTopOfPrioritySubqueue();
             }
         }
@@ -89,13 +89,13 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
             _rb.velocity = new Vector2(_bodySpeed * _move.x, 0);
             if (_move.x < 0)
             {
-                _bodySprite.flipX = true;
+                transform.eulerAngles = new Vector3(0, 180, 0);
                 _bodyVCam = _bodyVCamLeft;
                 _bodyVCam.MoveToTopOfPrioritySubqueue();
             }
             else if (_move.x > 0)
             {
-                _bodySprite.flipX = false;
+                transform.eulerAngles = Vector3.zero;
                 _bodyVCam = _bodyVCamRight;
                 _bodyVCam.MoveToTopOfPrioritySubqueue();
             }
