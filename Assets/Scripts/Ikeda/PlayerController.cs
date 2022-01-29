@@ -28,6 +28,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] ParticleSystem _callParticle;
     /// <summary>ˆÚ“®“ü—Í’l</summary>
     Vector2 _move;
+    [Tooltip("Cinemachine‚ÌƒuƒŒƒ“ƒh‚ÌŽžŠÔ")]
+    [SerializeField] float _brendTime;
+    [Tooltip("–ß‚é“z")]
+    [SerializeField] GameObject _orb;
+
 
     SpriteRenderer _bodySprite;
     SpriteRenderer _astralSprite;
@@ -63,6 +68,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_isBodyOrAstral)
         {
+            _move.Normalize();
             _astralRb.velocity = _astralSpeed * _move;
             if (_move.x < 0)
             {
@@ -100,6 +106,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_astralInstance)
             {
+                StartCoroutine(Buck(_brendTime, _astralInstance.transform.position, transform.position));
                 Destroy(_astralInstance);
             }
             _isBodyOrAstral = false;
@@ -134,5 +141,16 @@ public class PlayerController : MonoBehaviour
     {
         yield return null;
         ps.Play();
+    }
+
+    IEnumerator Buck(float time, Vector2 astral, Vector2 body)
+    {
+        var go =  Instantiate(_orb, _astralInstance.transform.position, Quaternion.identity);
+        for (float course = 0; course <= time; course += Time.deltaTime)
+        {
+            go.transform.position = Vector2.Lerp(astral, body, course / time);
+            yield return null;
+        }
+        Destroy(go);
     }
 }
