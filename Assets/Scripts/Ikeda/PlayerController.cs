@@ -91,9 +91,10 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            _astralInstance = Instantiate(_astralBody, transform);
+            _astralInstance = Instantiate(_astralBody, transform.position, transform.rotation);
             _astralRb = _astralInstance.GetComponent<Rigidbody2D>();
             _astralSprite = _astralInstance.GetComponent<SpriteRenderer>();
+            _astralSprite.flipX = _bodySprite.flipX;
             _isBodyOrAstral = true;
             _rb.velocity = Vector2.zero;
             _astralVCam.MoveToTopOfPrioritySubqueue();
