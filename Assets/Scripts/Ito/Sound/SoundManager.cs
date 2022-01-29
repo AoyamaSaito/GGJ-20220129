@@ -76,7 +76,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
 public enum SoundType
 {
     DoorOpen = 0,
-    Switch,
+    Button,
 }
 
 [System.Serializable]
