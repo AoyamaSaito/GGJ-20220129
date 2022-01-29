@@ -34,6 +34,9 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _bodySprite = GetComponent<SpriteRenderer>();
+        _bodyVCam.Priority = 10;
+        _astralVCam.Priority = 10;
+        _bodyVCam.MoveToTopOfPrioritySubqueue();
     }
 
     // Update is called once per frame
