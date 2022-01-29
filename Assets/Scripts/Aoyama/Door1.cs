@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class Door1 : DoorBase
 {
-
+    [SerializeField] Animation _doorAnim;
+    [SerializeField] AudioSource _doorAudio;
     public override void Push()
     {
+        _doorAudio.Play();
+        _doorAnim.Play();
         //è„Ç…è„Ç™ÇÈ
     }
 
     void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        _doorAudio = GetComponent<AudioSource>();
+        _doorAnim = GetComponent<Animation>();
     }
 }
