@@ -654,7 +654,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &726381988
 MonoBehaviour:
@@ -676,6 +676,8 @@ MonoBehaviour:
   _astralVCamRight: {fileID: 67799058}
   _astralVCamLeft: {fileID: 1445396269}
   _callParticle: {fileID: 4168946512139546121, guid: 67acc8ecc9afd54448dab4f04a7233d1, type: 3}
+  _brendTime: 0.5
+  _orb: {fileID: 7850813561152793967, guid: 5660a1531b97f6b4bae78c3f73fe0e94, type: 3}
 --- !u!50 &726381989
 Rigidbody2D:
   serializedVersion: 4
@@ -1260,7 +1262,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -5002868834991968789, guid: 67d363dac7db42445a9f1379a6d1862f, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -5002868834991968789, guid: 67d363dac7db42445a9f1379a6d1862f, type: 3}
       propertyPath: m_LocalScale.z
