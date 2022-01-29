@@ -184,7 +184,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67799057}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9200816, y: -1.981327, z: -23.596043}
+  m_LocalPosition: {x: 1.9200816, y: -1.981327, z: -4.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 935534950}
@@ -675,6 +675,7 @@ MonoBehaviour:
   _bodyVCamLeft: {fileID: 1933580450}
   _astralVCamRight: {fileID: 67799058}
   _astralVCamLeft: {fileID: 1445396269}
+  _callParticle: {fileID: 4168946512139546121, guid: 67acc8ecc9afd54448dab4f04a7233d1, type: 3}
 --- !u!50 &726381989
 Rigidbody2D:
   serializedVersion: 4
@@ -706,7 +707,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -828,7 +829,7 @@ GameObject:
   - component: {fileID: 1086663707}
   - component: {fileID: 1086663706}
   - component: {fileID: 1086663705}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1092,7 +1093,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1445396267}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9200816, y: -1.981327, z: -23.596043}
+  m_LocalPosition: {x: 1.9200816, y: -1.981327, z: -4.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 673655255}
