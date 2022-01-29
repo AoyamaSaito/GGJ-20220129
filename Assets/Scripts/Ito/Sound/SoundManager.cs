@@ -93,9 +93,9 @@ public class SoundPoolParam
 
     [SerializeField] public SoundType Type;
 
-    [SerializeField]public GameObject Prefab;
+    [SerializeField] public GameObject Prefab;
 
-    [SerializeField]public int MaxCount;
+    [SerializeField] public int MaxCount;
 }
 
 
