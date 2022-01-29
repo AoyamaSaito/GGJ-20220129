@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -15,6 +16,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _bodySpeed;
     [Tooltip("幽体状態の移動速度")]
     [SerializeField] Vector2 _astralSpeed;
+    [Tooltip("肉体のカメラ")]
+    [SerializeField] CinemachineVirtualCameraBase _bodyVCam;
+    [Tooltip("幽体のカメラ")]
+    [SerializeField] CinemachineVirtualCameraBase _astralVCam;
     /// <summary>移動入力値</summary>
     Vector2 _move;
 
@@ -79,6 +84,7 @@ public class PlayerController : MonoBehaviour
                 Destroy(_astralInstance);
             }
             _isBodyOrAstral = false;
+            _bodyVCam.MoveToTopOfPrioritySubqueue();
         }
         else
         {
@@ -87,6 +93,9 @@ public class PlayerController : MonoBehaviour
             _astralSprite = _astralInstance.GetComponent<SpriteRenderer>();
             _isBodyOrAstral = true;
             _rb.velocity = Vector2.zero;
+            _astralVCam.MoveToTopOfPrioritySubqueue();
+            _astralVCam.LookAt = _astralInstance.transform;
+            _astralVCam.Follow = _astralInstance.transform;
         }
     }
 }
