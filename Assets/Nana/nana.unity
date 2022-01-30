@@ -169,6 +169,7 @@ MonoBehaviour:
   _callParticle: {fileID: 4168946512139546121, guid: 67acc8ecc9afd54448dab4f04a7233d1, type: 3}
   _brendTime: 0
   _orb: {fileID: 0}
+  _anim: {fileID: 0}
 --- !u!50 &88120318
 Rigidbody2D:
   serializedVersion: 4
@@ -432,6 +433,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: body
       objectReference: {fileID: 0}
+    - target: {fileID: -1500122717692346400, guid: 323afc65a7ff70a4a92f40a034e23bf2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1566333233488146165, guid: 323afc65a7ff70a4a92f40a034e23bf2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5940123
@@ -500,6 +505,10 @@ PrefabInstance:
     - target: {fileID: 6130032622349093401, guid: 422192185a9c8a54895ed068fa1e16c7, type: 3}
       propertyPath: m_Name
       value: "\u30AD\u30E3\u30E9\u30E9\u30D5\u900F\u904E"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6130032622349093401, guid: 422192185a9c8a54895ed068fa1e16c7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6130032622349093403, guid: 422192185a9c8a54895ed068fa1e16c7, type: 3}
       propertyPath: m_RootOrder
