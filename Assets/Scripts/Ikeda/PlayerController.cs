@@ -36,6 +36,9 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
     [Tooltip("肉体のアニメーター")]
     [SerializeField] Animator _anim;
 
+    /// <summary>右向きがtrue</summary>
+    bool _isRightOrLeft = true;
+
 
     SpriteRenderer _bodySprite;
     SpriteRenderer _astralSprite;
@@ -89,12 +92,14 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
             _rb.velocity = new Vector2(_bodySpeed * _move.x, 0);
             if (_move.x < 0)
             {
+                _isRightOrLeft = false;
                 transform.eulerAngles = new Vector3(0, 180, 0);
                 _bodyVCam = _bodyVCamLeft;
                 _bodyVCam.MoveToTopOfPrioritySubqueue();
             }
             else if (_move.x > 0)
             {
+                _isRightOrLeft = true;
                 transform.eulerAngles = Vector3.zero;
                 _bodyVCam = _bodyVCamRight;
                 _bodyVCam.MoveToTopOfPrioritySubqueue();
@@ -130,15 +135,16 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
             _astralInstance = Instantiate(_astralBody, transform.position, Quaternion.identity);
             _astralRb = _astralInstance.GetComponent<Rigidbody2D>();
             _astralSprite = _astralInstance.GetComponent<SpriteRenderer>();
-            _astralSprite.flipX = _bodySprite.flipX;
-            if (_bodySprite.flipX)
+            if (!_isRightOrLeft)
             {
+                _astralInstance.transform.eulerAngles = new Vector3(0, 180, 0);
                 _astralVCamLeft.MoveToTopOfPrioritySubqueue();
                 _astralVCamLeft.Follow = _astralInstance.transform;
                 _astralVCamRight.Follow = _astralInstance.transform;
             }
             else
             {
+                _astralInstance.transform.eulerAngles = Vector3.zero;
                 _astralVCamRight.MoveToTopOfPrioritySubqueue();
                 _astralVCamLeft.Follow = _astralInstance.transform;
                 _astralVCamRight.Follow = _astralInstance.transform;
