@@ -77,6 +77,7 @@ public enum SoundType
 {
     DoorOpen = 0,
     Button,
+    StopThunder,
 }
 
 [System.Serializable]
