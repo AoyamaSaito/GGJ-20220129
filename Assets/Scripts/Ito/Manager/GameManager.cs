@@ -11,11 +11,13 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     [SerializeField] private Transform[] _savePoints;
     [SerializeField] private GameObject _gameOverUi;
+    [SerializeField] private GameObject _gameClereUi;
     [SerializeField] private string _playerTag = "Player";
     [SerializeField] private Text _timerText;
+    [SerializeField] private float _timer;
     private GameObject _player;
     private int _savePointIndex = 0;
-    private float _timer;
+    //private float _timer;
 
     private void Awake()
     {
@@ -29,6 +31,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         _timer -= Time.deltaTime;
         _timerText.text = _timer.ToString("F0");
+        if (_timer <= 0f)
+        {
+            _timerText.gameObject.SetActive(false);
+            TimeOver();
+        }
     }
 
     void SavePointUpdate(int savePointIndex)
@@ -45,6 +52,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public void Respawn()
     {
         _player.transform.position = _savePoints[_savePointIndex].position;
+    }
+    public void GameClear()
+    {
+        _gameClereUi.SetActive(true);
     }
 
 }
