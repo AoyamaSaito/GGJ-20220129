@@ -14,6 +14,7 @@ public class PressMachine : MonoBehaviour
     [Tooltip("©•ª‚ÌTransform")]Transform myTransform;
     float timer = 0;
     bool up = false;
+    bool stop = false;
 
     void Start()
     {
@@ -30,13 +31,13 @@ public class PressMachine : MonoBehaviour
 
     void MovePressMachine()
     {
-        if (up)
+        if(!up)
         {
-            timer += Time.deltaTime;
+            timer -= Time.deltaTime;
         }
         else
         {
-            timer -= Time.deltaTime;
+            timer += Time.deltaTime;
         }
 
         //Œˆ‚ß‚ç‚ê‚½’n“_‚É“’B‚·‚é‚Æbool‚ğØ‚è‘Ö‚¦‚é
