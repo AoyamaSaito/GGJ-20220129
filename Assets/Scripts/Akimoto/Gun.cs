@@ -33,11 +33,11 @@ public class Gun : MonoBehaviour
         }
         else if(_targetType == TargetType.Astral)
         {
-            obj = Instantiate(_astralBulletPrefab, _muzzle.transform.position, Quaternion.Euler(_muzzle.up));
+            obj = Instantiate(_astralBulletPrefab, _muzzle.transform.position, Quaternion.Euler(_muzzle.eulerAngles /*- new Vector3(0, 0, 90)*/));
         }
         else
         {
-            obj = Instantiate(_ambiBulletPrefab, _muzzle.transform.position, Quaternion.Euler( _muzzle.up));
+            obj = Instantiate(_ambiBulletPrefab, _muzzle.transform.position, Quaternion.Euler( _muzzle.eulerAngles + _ambiBulletPrefab.transform.eulerAngles));
         }
         obj.GetComponent<Rigidbody2D>().velocity = _muzzle.transform.right * _bulletSpeed;
     }
