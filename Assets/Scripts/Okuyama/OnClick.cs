@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class OnClick : MonoBehaviour
 {
+    /// <summary>ëÄçÏï˚ñ@</summary>
     [SerializeField] GameObject _howToPlay;
     public void StartGame()
     {
@@ -17,5 +18,9 @@ public class OnClick : MonoBehaviour
     public void DontHowToPlay()
     {
         _howToPlay.SetActive(false);
+    }
+    public void Title()
+    {
+        SceneManager.LoadScene("");
     }
 }
