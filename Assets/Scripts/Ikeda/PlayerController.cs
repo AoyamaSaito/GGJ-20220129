@@ -34,7 +34,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
     [Tooltip("戻る奴")]
     [SerializeField] GameObject _orb;
     [Tooltip("肉体のアニメーター")]
-    [SerializeField] Animator _anim;
+    [SerializeField] public Animator Anim;
     [Tooltip("実体の胸部")]
     [SerializeField] Transform _bodyBust;
     [Tooltip("幽体の胸部")]
@@ -115,11 +115,11 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
     {
         if(_move != new Vector2(0 , 0) && _isBodyOrAstral == false)
         {
-            _anim.SetBool("move", true);
+            Anim.SetBool("move", true);
         }
         else if(_move == new Vector2(0, 0) && _isBodyOrAstral == false)
         {
-            _anim.SetBool("move", false);
+            Anim.SetBool("move", false);
         }
     }
 
@@ -128,7 +128,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
     {
         if (_isBodyOrAstral)
         {
-            _anim.SetBool("_isBodyOrAstral", false);
+            Anim.SetBool("_isBodyOrAstral", false);
             if (_astralInstance)
             {
                 StartCoroutine(Buck(_brendTime, _astralBust.position, _bodyBust));
@@ -139,7 +139,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
         }
         else
         {
-            _anim.SetBool("_isBodyOrAstral", true);
+            Anim.SetBool("_isBodyOrAstral", true);
             _astralInstance = Instantiate(_astralBody,　_bodyBust.transform.position, Quaternion.identity);
             _astralBust = _astralInstance.transform.GetChild(0);
             if (!_astralBust)

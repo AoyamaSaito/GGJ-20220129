@@ -86,6 +86,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public void Respawn()
     {
         PlayerController.Instance.AstralProjectionCancel();
+        PlayerController.Instance.Anim.SetBool("_isBodyOrAstral", false);
         _player.transform.position = _savePoints[_savePointIndex].position;
     }
     public void GameClear()

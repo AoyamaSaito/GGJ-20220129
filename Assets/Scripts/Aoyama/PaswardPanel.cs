@@ -34,14 +34,14 @@ public class PaswardPanel : MonoBehaviour
             paswardPanel.SetActive(true);
         }
 
-        //if(PlayerController.Instance.IsBodyOrAstral)
-        //{
-        //    astralNumber.SetActive(true);
-        //}
-        //else
-        //{
-        //    astralNumber.SetActive(false);
-        //}
+        if (PlayerController.Instance.IsBodyOrAstral)
+        {
+            astralNumber.SetActive(true);
+        }
+        else
+        {
+            astralNumber.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

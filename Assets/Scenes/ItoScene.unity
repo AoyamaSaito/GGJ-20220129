@@ -1093,10 +1093,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5598500996806473660, guid: df41bdfecf2c0d04ab5d4e7b15d1b79a, type: 3}
-      propertyPath: astralNumber
-      value: 
-      objectReference: {fileID: 500337500628582982}
     - target: {fileID: 5827475267595782616, guid: df41bdfecf2c0d04ab5d4e7b15d1b79a, type: 3}
       propertyPath: m_Name
       value: PaswardPanelPrototype (1)
@@ -1147,11 +1143,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df41bdfecf2c0d04ab5d4e7b15d1b79a, type: 3}
---- !u!1 &500337500628582982 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6427903923405039866, guid: df41bdfecf2c0d04ab5d4e7b15d1b79a, type: 3}
-  m_PrefabInstance: {fileID: 500337500628582981}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4222745486736668752
 PrefabInstance:
   m_ObjectHideFlags: 0
