@@ -23,8 +23,8 @@ public class ErectDoor : DoorBase
     IEnumerator OpenSound()
     {
         yield return new WaitForSeconds(_openSoundDelay);
-        SoundManager.Instance.UseSound(SoundType.DoorOpen);
-        _electromagneticAnim.Play("Thunder");
+        SoundManager.Instance.UseSound(SoundType.StopThunder);
+        _electromagneticAnim.Play("FlorButton");
         _electromagnetiObj.SetActive(false);
     }
 }
