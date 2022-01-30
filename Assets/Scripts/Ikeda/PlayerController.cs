@@ -35,10 +35,12 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
     [SerializeField] GameObject _orb;
     [Tooltip("肉体のアニメーター")]
     [SerializeField] Animator _anim;
+    [Tooltip("胸部")]
+    [SerializeField] Transform _bust;
 
+    /// <summary>右向きがtrue</summary>
+    bool _isRightOrLeft = true;
 
-    SpriteRenderer _bodySprite;
-    SpriteRenderer _astralSprite;
 
     Rigidbody2D _rb;
     Rigidbody2D _astralRb;
@@ -48,13 +50,16 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _bodySprite = GetComponent<SpriteRenderer>();
         _bodyVCam = _bodyVCamRight;
         _bodyVCamRight.Priority = 10;
         _astralVCamLeft.Priority = 10;
         _bodyVCamRight.Priority = 10;
         _astralVCamLeft.Priority = 10;
         _bodyVCam.MoveToTopOfPrioritySubqueue();
+        if (!_bust)
+        {
+            _bust = transform;
+        }
     }
 
     // Update is called once per frame
@@ -75,12 +80,12 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
             _astralRb.velocity = _astralSpeed * _move;
             if (_move.x < 0)
             {
-                _astralSprite.flipX = true;
+                _astralInstance.transform.eulerAngles = new Vector3(0, 180, 0);
                 _astralVCamLeft.MoveToTopOfPrioritySubqueue();
             }
             else if (_move.x > 0)
             {
-                _astralSprite.flipX = false;
+                _astralInstance.transform.eulerAngles = Vector3.zero;
                 _astralVCamRight.MoveToTopOfPrioritySubqueue();
             }
         }
@@ -89,13 +94,15 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
             _rb.velocity = new Vector2(_bodySpeed * _move.x, 0);
             if (_move.x < 0)
             {
-                _bodySprite.flipX = true;
+                _isRightOrLeft = false;
+                transform.eulerAngles = new Vector3(0, 180, 0);
                 _bodyVCam = _bodyVCamLeft;
                 _bodyVCam.MoveToTopOfPrioritySubqueue();
             }
             else if (_move.x > 0)
             {
-                _bodySprite.flipX = false;
+                _isRightOrLeft = true;
+                transform.eulerAngles = Vector3.zero;
                 _bodyVCam = _bodyVCamRight;
                 _bodyVCam.MoveToTopOfPrioritySubqueue();
             }
@@ -105,7 +112,11 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
     private void LateUpdate()
     {
         if (_anim)
+        {
             _anim.SetBool("_isBodyOrAstral", _isBodyOrAstral);
+            _anim.SetFloat("XSpeed", _move.x);
+            _anim.SetFloat("YSpeed", _move.y);
+        }
     }
 
     /// <summary>肉体と幽体を切り替え </summary>
@@ -115,7 +126,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
         {
             if (_astralInstance)
             {
-                StartCoroutine(Buck(_brendTime, _astralInstance.transform.position, transform.position));
+                StartCoroutine(Buck(_brendTime, _astralInstance.transform.position, _bust.transform.position));
                 Destroy(_astralInstance);
             }
             _isBodyOrAstral = false;
@@ -123,33 +134,26 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
         }
         else
         {
-            _astralInstance = Instantiate(_astralBody, transform.position, Quaternion.identity);
+            _astralInstance = Instantiate(_astralBody,　_bust.transform.position, Quaternion.identity);
             _astralRb = _astralInstance.GetComponent<Rigidbody2D>();
-            _astralSprite = _astralInstance.GetComponent<SpriteRenderer>();
-            _astralSprite.flipX = _bodySprite.flipX;
-            if (_bodySprite.flipX)
+            if (!_isRightOrLeft)
             {
+                _astralInstance.transform.eulerAngles = new Vector3(0, 180, 0);
                 _astralVCamLeft.MoveToTopOfPrioritySubqueue();
                 _astralVCamLeft.Follow = _astralInstance.transform;
                 _astralVCamRight.Follow = _astralInstance.transform;
             }
             else
             {
+                _astralInstance.transform.eulerAngles = Vector3.zero;
                 _astralVCamRight.MoveToTopOfPrioritySubqueue();
                 _astralVCamLeft.Follow = _astralInstance.transform;
                 _astralVCamRight.Follow = _astralInstance.transform;
             }
             _isBodyOrAstral = true;
             _rb.velocity = Vector2.zero;
-            var ps = Instantiate(_callParticle, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
-            StartCoroutine(Particle(ps));
+            Instantiate(_callParticle, _bust.transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
         }
-    }
-
-    IEnumerator Particle(ParticleSystem ps)
-    {
-        yield return null;
-        ps.Play();
     }
 
     IEnumerator Buck(float time, Vector2 astral, Vector2 body)

@@ -17,15 +17,6 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    //Player‚ªCollder‚È‚Ì‚©Trigger‚È‚Ì‚©•ª‚©‚ç‚ñ‚©‚Á‚½‚©‚ç‚Ç‚Á‚¿‚à—pˆÓ‚µ‚Æ‚¢‚½
-    //Á‚µ‚½‚¯‚ê‚Î‚¢‚ç‚È‚¢•ûÁ‚µ‚Ä
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Destroy(gameObject);
-        }
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
