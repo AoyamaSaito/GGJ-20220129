@@ -128,7 +128,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
         {
             if (_astralInstance)
             {
-                StartCoroutine(Buck(_brendTime, _astralInstance.transform.position, _bodyBust.transform.position));
+                StartCoroutine(Buck(_brendTime, _astralBust.position, _bodyBust.position));
                 Destroy(_astralInstance);
             }
             _isBodyOrAstral = false;
@@ -137,8 +137,8 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
         else
         {
             _astralInstance = Instantiate(_astralBody,Å@_bodyBust.transform.position, Quaternion.identity);
-            _astralBust = transform.Find("AstralBust");
-            if (_astralBust)
+            _astralBust = _astralInstance.transform.GetChild(0);
+            if (!_astralBust)
             {
                 _astralBust = _astralInstance.transform;
             }
@@ -165,7 +165,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 
     IEnumerator Buck(float time, Vector2 astral, Vector2 body)
     {
-        var go = Instantiate(_orb, _astralInstance.transform.position, Quaternion.identity);
+        var go = Instantiate(_orb, astral, Quaternion.identity);
         for (float course = 0; course <= time; course += Time.deltaTime)
         {
             go.transform.position = Vector2.Lerp(astral, body, course / time);
