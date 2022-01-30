@@ -12,6 +12,7 @@ public class PressMachine : MonoBehaviour
 
     [Tooltip("プレス機の初期位置")]Vector3 firstPosition = default;
     [Tooltip("自分のTransform")]Transform myTransform;
+
     float timer = 0;
     bool up = false;
     bool stop = false;

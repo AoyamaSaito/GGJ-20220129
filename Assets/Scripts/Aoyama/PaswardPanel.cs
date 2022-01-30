@@ -6,11 +6,14 @@ using UnityEngine.UI;
 public class PaswardPanel : MonoBehaviour
 {
     [SerializeField, Tooltip("開けるドア")] DoorBase openDoor;
+    [SerializeField, Tooltip("赤のランプ")] GameObject redLump;
+    [SerializeField, Tooltip("緑のランプ")] GameObject greenLump;
     [SerializeField, Tooltip("パスワードを入力するパネル")] GameObject paswardPanel;
     [SerializeField, Tooltip("panelの数字を出す部分")] Text display;
     [SerializeField, Tooltip("霊体でしか見えない数字")] GameObject astralNumber;
     [SerializeField, Tooltip("Playerのタグ")] string playerTag = "Player";
     [SerializeField, Tooltip("答え")] int[] answer = default;
+    [SerializeField, Tooltip("閉じるまでの時間")] float waitTime = 1;
     [Header("Test")]
     [SerializeField] bool inAria = false;
 
@@ -18,6 +21,8 @@ public class PaswardPanel : MonoBehaviour
     int count = 0;
     void Start()
     {
+        redLump.SetActive(true);
+        greenLump.SetActive(false);
         paswardPanel?.SetActive(false);
         display.text = currntPanel;
     }
@@ -26,17 +31,17 @@ public class PaswardPanel : MonoBehaviour
     {
         if (Input.GetKeyDown("f") && inAria)
         {
-            paswardPanel?.SetActive(true);
+            paswardPanel.SetActive(true);
         }
 
-        if(PlayerController.Instance.IsBodyOrAstral)
-        {
-            astralNumber.SetActive(true);
-        }
-        else
-        {
-            astralNumber.SetActive(false);
-        }
+        //if(PlayerController.Instance.IsBodyOrAstral)
+        //{
+        //    astralNumber.SetActive(true);
+        //}
+        //else
+        //{
+        //    astralNumber.SetActive(false);
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -68,6 +73,7 @@ public class PaswardPanel : MonoBehaviour
         }
         else
         {
+            Debug.Log(number);
             currntPanel += number.ToString();
             display.text = currntPanel;
             Debug.Log(number);
@@ -75,10 +81,18 @@ public class PaswardPanel : MonoBehaviour
             if (count == 6)
             {
                 Debug.Log("成功");
-                openDoor?.Push();
-                paswardPanel?.SetActive(false);
-                this.gameObject.GetComponent<PaswardPanel>().enabled = false;
+                StartCoroutine(SuccessCor());
             }
         }
+    }
+
+    IEnumerator SuccessCor()
+    {
+        redLump.SetActive(false);
+        greenLump.SetActive(true);
+        yield return new WaitForSeconds(waitTime);
+        openDoor?.Push();
+        paswardPanel?.SetActive(false);
+        this.gameObject.GetComponent<PaswardPanel>().enabled = false;
     }
 }
