@@ -206,6 +206,36 @@ MonoBehaviour:
     m_Extent: {x: 2.3261304, y: 4.9000006, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
+--- !u!1 &2252310587809428842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5723257130484008412}
+  m_Layer: 0
+  m_Name: Bust
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5723257130484008412
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2252310587809428842}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 20, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4793717101806833302}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2516164800109959348
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,6 +411,7 @@ Transform:
   - {fileID: 8570547900862869807}
   - {fileID: 7295434971336234492}
   - {fileID: 2620127529037781334}
+  - {fileID: 5723257130484008412}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -447,6 +478,7 @@ MonoBehaviour:
   _brendTime: 0
   _orb: {fileID: 0}
   _anim: {fileID: 0}
+  _bust: {fileID: 5723257130484008412}
 --- !u!1 &3881810160746906097
 GameObject:
   m_ObjectHideFlags: 0
