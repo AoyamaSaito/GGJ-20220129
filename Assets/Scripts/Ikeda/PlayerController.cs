@@ -113,11 +113,13 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 
     private void LateUpdate()
     {
-        if (_anim)
+        if(_move != new Vector2(0 , 0) && _isBodyOrAstral == false)
         {
-            _anim.SetBool("_isBodyOrAstral", _isBodyOrAstral);
-            _anim.SetFloat("XSpeed", _move.x);
-            _anim.SetFloat("YSpeed", _move.y);
+            _anim.SetBool("move", true);
+        }
+        else if(_move == new Vector2(0, 0) && _isBodyOrAstral == false)
+        {
+            _anim.SetBool("move", false);
         }
     }
 
@@ -126,6 +128,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
     {
         if (_isBodyOrAstral)
         {
+            _anim.SetBool("_isBodyOrAstral", false);
             if (_astralInstance)
             {
                 StartCoroutine(Buck(_brendTime, _astralBust.position, _bodyBust));
@@ -136,6 +139,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
         }
         else
         {
+            _anim.SetBool("_isBodyOrAstral", true);
             _astralInstance = Instantiate(_astralBody,Å@_bodyBust.transform.position, Quaternion.identity);
             _astralBust = _astralInstance.transform.GetChild(0);
             if (!_astralBust)
