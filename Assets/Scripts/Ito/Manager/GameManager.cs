@@ -16,6 +16,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField] private string _playerTag = "Player";
     [SerializeField] private GameObject _timerUi;
     [SerializeField] private Text _timerMinutesText;
+    [SerializeField] private Text coron;
     [SerializeField] private Text _timerSecondsText;
     private GameObject _player;
     private int _savePointIndex = 0;
@@ -44,6 +45,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         {
             _timerUi.SetActive(false);
             TimeOver();
+        }
+        else if (_timerminutes <= 0f && _timerSeconds <= 30)
+        {
+            _timerMinutesText.color = Color.red;
+            coron.color = Color.red;
+            _timerSecondsText.color = Color.red;
         }
 
         _timerSeconds -= Time.deltaTime;
