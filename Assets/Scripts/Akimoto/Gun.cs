@@ -29,15 +29,15 @@ public class Gun : MonoBehaviour
         GameObject obj = default;
         if (_targetType == TargetType.Body)
         {
-            obj = Instantiate(_bodyBulletPrefab, transform.position, Quaternion.identity);
+            obj = Instantiate(_bodyBulletPrefab, _muzzle.transform.position, Quaternion.Euler(_muzzle.up));
         }
         else if(_targetType == TargetType.Astral)
         {
-            obj = Instantiate(_astralBulletPrefab, transform.position, Quaternion.identity);
+            obj = Instantiate(_astralBulletPrefab, _muzzle.transform.position, Quaternion.Euler(_muzzle.up));
         }
         else
         {
-            obj = Instantiate(_ambiBulletPrefab, transform.position, Quaternion.identity);
+            obj = Instantiate(_ambiBulletPrefab, _muzzle.transform.position, Quaternion.Euler( _muzzle.up));
         }
         obj.GetComponent<Rigidbody2D>().velocity = _muzzle.transform.right * _bulletSpeed;
     }
