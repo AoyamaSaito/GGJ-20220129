@@ -105,7 +105,11 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
     private void LateUpdate()
     {
         if (_anim)
+        {
             _anim.SetBool("_isBodyOrAstral", _isBodyOrAstral);
+            _anim.SetFloat("XSpeed", _move.x);
+            _anim.SetFloat("YSpeed", _move.y);
+        }
     }
 
     /// <summary>“÷‘Ì‚Æ—H‘Ì‚ğØ‚è‘Ö‚¦ </summary>
