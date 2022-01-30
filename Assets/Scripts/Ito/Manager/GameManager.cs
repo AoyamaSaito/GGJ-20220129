@@ -38,7 +38,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
     }
 
-    void SavePointUpdate(int savePointIndex)
+    public void SavePointUpdate(int savePointIndex)
     {
         _savePointIndex = savePointIndex;
     }
