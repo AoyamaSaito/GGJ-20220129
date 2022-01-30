@@ -126,9 +126,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c621bf0f34748f643aa11b4c3c2a5874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bodyBulletPrefab: {fileID: 8254272762187652331, guid: 46ec62a6b0a687943a69be71eca3d7a0, type: 3}
-  _astralBulletPrefab: {fileID: 8254272762187652331, guid: d7434ab86b978024baf8db9b78cf7709, type: 3}
-  _targetType: 0
+  _bodyBulletPrefab: {fileID: 1978127837056597288, guid: 51706517019e454419f89616f04498cc, type: 3}
+  _astralBulletPrefab: {fileID: 8269976264276201329, guid: 9d901e7a94a050a48a33b845ca53fad3, type: 3}
+  _ambiBulletPrefab: {fileID: 8254272762187652331, guid: 46ec62a6b0a687943a69be71eca3d7a0, type: 3}
+  _targetType: 2
   _fireInterval: 3
   _bulletSpeed: 3
   _muzzle: {fileID: 7013581249446653249}

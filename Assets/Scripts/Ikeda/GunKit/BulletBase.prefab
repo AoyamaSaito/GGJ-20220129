@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 8254272762187652341}
   - component: {fileID: 8254272762187652340}
   - component: {fileID: 8254272762187652342}
-  - component: {fileID: 3666456261184917548}
-  - component: {fileID: -1298044930312009489}
-  m_Layer: 7
-  m_Name: AstralBullet
+  - component: {fileID: -5043526302747281394}
+  - component: {fileID: 8438868793552170674}
+  m_Layer: 0
+  m_Name: BulletBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,7 +106,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &3666456261184917548
+--- !u!58 &-5043526302747281394
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,13 +116,13 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &-1298044930312009489
+--- !u!114 &8438868793552170674
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
