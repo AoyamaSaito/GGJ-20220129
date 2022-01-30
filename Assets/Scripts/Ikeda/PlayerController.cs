@@ -35,8 +35,10 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
     [SerializeField] GameObject _orb;
     [Tooltip("肉体のアニメーター")]
     [SerializeField] Animator _anim;
-    [Tooltip("胸部")]
-    [SerializeField] Transform _bust;
+    [Tooltip("実体の胸部")]
+    [SerializeField] Transform _bodyBust;
+    [Tooltip("幽体の胸部")]
+    Transform _astralBust;
 
     /// <summary>右向きがtrue</summary>
     bool _isRightOrLeft = true;
@@ -56,9 +58,9 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
         _bodyVCamRight.Priority = 10;
         _astralVCamLeft.Priority = 10;
         _bodyVCam.MoveToTopOfPrioritySubqueue();
-        if (!_bust)
+        if (!_bodyBust)
         {
-            _bust = transform;
+            _bodyBust = transform;
         }
     }
 
@@ -126,7 +128,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
         {
             if (_astralInstance)
             {
-                StartCoroutine(Buck(_brendTime, _astralInstance.transform.position, _bust.transform.position));
+                StartCoroutine(Buck(_brendTime, _astralInstance.transform.position, _bodyBust.transform.position));
                 Destroy(_astralInstance);
             }
             _isBodyOrAstral = false;
@@ -134,7 +136,12 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
         }
         else
         {
-            _astralInstance = Instantiate(_astralBody,　_bust.transform.position, Quaternion.identity);
+            _astralInstance = Instantiate(_astralBody,　_bodyBust.transform.position, Quaternion.identity);
+            _astralBust = transform.Find("AstralBust");
+            if (_astralBust)
+            {
+                _astralBust = _astralInstance.transform;
+            }
             _astralRb = _astralInstance.GetComponent<Rigidbody2D>();
             if (!_isRightOrLeft)
             {
@@ -152,7 +159,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
             }
             _isBodyOrAstral = true;
             _rb.velocity = Vector2.zero;
-            Instantiate(_callParticle, _bust.transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
+            Instantiate(_callParticle, _bodyBust.transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
         }
     }
 
