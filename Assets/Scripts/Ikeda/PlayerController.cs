@@ -35,13 +35,12 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
     [SerializeField] GameObject _orb;
     [Tooltip("肉体のアニメーター")]
     [SerializeField] Animator _anim;
+    [Tooltip("胸部")]
+    [SerializeField] Transform _bust;
 
     /// <summary>右向きがtrue</summary>
     bool _isRightOrLeft = true;
 
-
-    SpriteRenderer _bodySprite;
-    SpriteRenderer _astralSprite;
 
     Rigidbody2D _rb;
     Rigidbody2D _astralRb;
@@ -51,13 +50,16 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _bodySprite = GetComponent<SpriteRenderer>();
         _bodyVCam = _bodyVCamRight;
         _bodyVCamRight.Priority = 10;
         _astralVCamLeft.Priority = 10;
         _bodyVCamRight.Priority = 10;
         _astralVCamLeft.Priority = 10;
         _bodyVCam.MoveToTopOfPrioritySubqueue();
+        if (!_bust)
+        {
+            _bust = transform;
+        }
     }
 
     // Update is called once per frame
@@ -124,7 +126,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
         {
             if (_astralInstance)
             {
-                StartCoroutine(Buck(_brendTime, _astralInstance.transform.position, transform.position));
+                StartCoroutine(Buck(_brendTime, _astralInstance.transform.position, _bust.transform.position));
                 Destroy(_astralInstance);
             }
             _isBodyOrAstral = false;
@@ -132,9 +134,8 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
         }
         else
         {
-            _astralInstance = Instantiate(_astralBody, transform.position, Quaternion.identity);
+            _astralInstance = Instantiate(_astralBody,　_bust.transform.position, Quaternion.identity);
             _astralRb = _astralInstance.GetComponent<Rigidbody2D>();
-            _astralSprite = _astralInstance.GetComponent<SpriteRenderer>();
             if (!_isRightOrLeft)
             {
                 _astralInstance.transform.eulerAngles = new Vector3(0, 180, 0);
@@ -151,8 +152,8 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
             }
             _isBodyOrAstral = true;
             _rb.velocity = Vector2.zero;
-            var ps = Instantiate(_callParticle, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
-            StartCoroutine(Particle(ps));
+            Instantiate(_callParticle, transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
+            //StartCoroutine(Particle(ps));
         }
     }
 
