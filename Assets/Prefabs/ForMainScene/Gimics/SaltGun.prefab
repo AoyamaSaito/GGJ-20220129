@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 4288485714318935779}
   - component: {fileID: 4392702579029999456}
   m_Layer: 0
-  m_Name: "\u98DB\u3073\u9053\u5177 1"
+  m_Name: SaltGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bodyBulletPrefab: {fileID: 0}
-  _astralBulletPrefab: {fileID: 7691680524853657495, guid: 5d9f43c81af135948b039fcc4d4336cd, type: 3}
+  _astralBulletPrefab: {fileID: 6335662007859338840, guid: c93e926226f68a44897f8fb4f8400643, type: 3}
   _ambiBulletPrefab: {fileID: 0}
   _targetType: 1
   _fireInterval: 1
