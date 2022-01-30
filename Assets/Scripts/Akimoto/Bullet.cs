@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(CircleCollider2D))]
+[RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(Collider))]
 public class Bullet : MonoBehaviour
 {
     [SerializeField] float _destroyTime = 5;
