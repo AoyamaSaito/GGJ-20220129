@@ -295,15 +295,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 163792425330250892, guid: 06ab535a9d288e24ea646eb033b802d3, type: 3}
       propertyPath: near clip plane
-      value: 0.3
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 163792425330250895, guid: 06ab535a9d288e24ea646eb033b802d3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.9200816
+      value: -0.90999603
       objectReference: {fileID: 0}
     - target: {fileID: 163792425330250895, guid: 06ab535a9d288e24ea646eb033b802d3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.323308
+      value: 0.3207116
       objectReference: {fileID: 0}
     - target: {fileID: 1845957215636512919, guid: 06ab535a9d288e24ea646eb033b802d3, type: 3}
       propertyPath: m_Sprite
