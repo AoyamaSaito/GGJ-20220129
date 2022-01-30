@@ -7,9 +7,11 @@ public class OnClick : MonoBehaviour
 {
     /// <summary>ëÄçÏï˚ñ@</summary>
     [SerializeField] GameObject _howToPlay;
+    [SerializeField] string _mainSceneName;
+    [SerializeField] string _titleSceneName;
     public void StartGame()
     {
-        SceneManager.LoadScene("");
+        SceneManager.LoadScene(_mainSceneName);
     }
     public void HowToPlay()
     {
@@ -21,6 +23,6 @@ public class OnClick : MonoBehaviour
     }
     public void Title()
     {
-        SceneManager.LoadScene("");
+        SceneManager.LoadScene(_titleSceneName);
     }
 }

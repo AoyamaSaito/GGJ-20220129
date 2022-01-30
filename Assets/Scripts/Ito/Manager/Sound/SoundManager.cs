@@ -78,6 +78,9 @@ public enum SoundType
     DoorOpen = 0,
     Button,
     StopThunder,
+    Save,
+    GameClear,
+    GameOver
 }
 
 [System.Serializable]

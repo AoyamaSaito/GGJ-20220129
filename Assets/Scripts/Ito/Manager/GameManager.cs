@@ -20,6 +20,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField] private Text _timerSecondsText;
     private GameObject _player;
     private int _savePointIndex = 0;
+    bool _firstTime = true;
     //private float _timer;
     [Header("Timer")]
     [SerializeField] int _timerminutes = 3;
@@ -33,6 +34,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         {
             Debug.LogError("プレイヤーを参照できませんでした");
         }
+        else if(_player)
+        {
+            Debug.Log("ﾌﾟﾚｲﾔｰ");
+        }
 
         if(!_timerMinutesText && !_timerSecondsText && !_timerUi)
         {
@@ -41,9 +46,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
     private void Update()
     {
+        _timerSeconds -= Time.deltaTime;
+
         if (_timerminutes <= 0f && _timerSeconds <= 0)
         {
-            _timerUi.SetActive(false);
             TimeOver();
         }
         else if (_timerminutes <= 0f && _timerSeconds <= 30)
@@ -53,7 +59,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             _timerSecondsText.color = Color.red;
         }
 
-        _timerSeconds -= Time.deltaTime;
         _timerMinutesText.text = _timerminutes.ToString("00");
         _timerSecondsText.text = (_timerSeconds / 1f).ToString("00");
 
@@ -71,6 +76,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void TimeOver()
     {
+        if (!_firstTime) return;
+        _firstTime = false;
+        _timerUi.SetActive(false);
         _player.SetActive(false);
         _gameOverUi.SetActive(true);
     }
@@ -82,7 +90,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     }
     public void GameClear()
     {
+        _player.SetActive(false);
         _gameClereUi.SetActive(true);
+        SoundManager.Instance.UseSound(SoundType.GameClear);
+        _timerUi.SetActive(false);
     }
 
 }
