@@ -152,15 +152,8 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
             }
             _isBodyOrAstral = true;
             _rb.velocity = Vector2.zero;
-            Instantiate(_callParticle, transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
-            //StartCoroutine(Particle(ps));
+            Instantiate(_callParticle, _bust.transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
         }
-    }
-
-    IEnumerator Particle(ParticleSystem ps)
-    {
-        yield return null;
-        ps.Play();
     }
 
     IEnumerator Buck(float time, Vector2 astral, Vector2 body)
