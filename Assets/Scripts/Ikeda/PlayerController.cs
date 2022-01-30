@@ -128,7 +128,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
         {
             if (_astralInstance)
             {
-                StartCoroutine(Buck(_brendTime, _astralBust.position, _bodyBust.position));
+                StartCoroutine(Buck(_brendTime, _astralBust.position, _bodyBust));
                 Destroy(_astralInstance);
             }
             _isBodyOrAstral = false;
@@ -163,12 +163,26 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
         }
     }
 
-    IEnumerator Buck(float time, Vector2 astral, Vector2 body)
+    public void AstralProjectionCancel()
+    {
+        if (_isBodyOrAstral)
+        {
+            if (_astralInstance)
+            {
+                StartCoroutine(Buck(_brendTime, _astralBust.position, _bodyBust));
+                Destroy(_astralInstance);
+            }
+            _isBodyOrAstral = false;
+            _bodyVCam.MoveToTopOfPrioritySubqueue();
+        }
+    }
+
+    IEnumerator Buck(float time, Vector2 astral, Transform body)
     {
         var go = Instantiate(_orb, astral, Quaternion.identity);
         for (float course = 0; course <= time; course += Time.deltaTime)
         {
-            go.transform.position = Vector2.Lerp(astral, body, course / time);
+            go.transform.position = Vector2.Lerp(astral, body.position, course / time);
             yield return null;
         }
         Destroy(go);

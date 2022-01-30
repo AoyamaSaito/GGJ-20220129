@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerKiller : MonoBehaviour
+public class AstralCanceler : MonoBehaviour
 {
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")
         {
-            CallRespawn();
+            PlayerController.Instance.AstralProjectionCancel();
         }
     }
 
@@ -17,12 +16,7 @@ public class PlayerKiller : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            CallRespawn();
+            PlayerController.Instance.AstralProjectionCancel();
         }
-    }
-
-    void CallRespawn()
-    {
-        GameManager.Instance.Respawn();
     }
 }
